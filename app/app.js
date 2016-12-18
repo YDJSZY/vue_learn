@@ -3,24 +3,47 @@
  */
 const Vue = require("vue");
 const VueRouter = require("vue-router");
-const viewA = require("./components/view_a/page_a");
-const viewB = require("./components/view_b/page_b");
+const routes = require("./route/routes");
+const store = require("vuex");
+console.log(store)
+Vue.use(require("vue-resource"));
 Vue.use(VueRouter);
-var router = new VueRouter();
-var App = Vue.extend({});
-router.map({
-    '/pageA': {
-        component: viewA.MyComponent
-    },
-    '/pageB': {
-        component: viewB.pageB
-    }
+const router = new VueRouter({
+    routes
 });
+var App = Vue.extend({});
+Vue.http.interceptors.push((request, next)  =>{
+    //console.log(request)
 
+    next((response) => {
+       // console.log(response)
+    return response
+    });
+});
 var home = Vue.extend({
     "props":["msg"],
     "template":'<h2>this is home page!!! {{msg}}</h2>'
 })
+const app = new Vue({
+    router:router,
+    store:store,
+    data:{
+        myData:[
+            {"name":"luwnewei"},
+            {"name":"haungsihong"}
+        ],
+        name:"vue"
+    },
+    beforeCreate: function () {
+        // `this` 指向 vm 实例
+        Vue.prototype.getMyInfo = function () {
+            return this.$http.get("./app/myInfo.json");
+        }
+        /*
+        })*/
+    }
+}).$mount('#app');
+/*
 new Vue({
     el: '#home',
     components:{
@@ -28,7 +51,7 @@ new Vue({
     }
 })
 //Vue.component('home',home)
-/*Vue.component('home', {
+/!*Vue.component('home', {
     // 声明 props
     props: ['msg'],
     // prop 可以用在模板内
@@ -42,5 +65,5 @@ new Vue({
     data:{
         h:"hello!!!"
     }
-})*/
-router.start(App, '#app');
+})*!/
+router.start(App, '#app');*/

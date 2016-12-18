@@ -18,7 +18,7 @@
     &lt;!&ndash; route outlet &ndash;&gt;
 
 </div>-->
-<div class="wrapper" id="app">
+<div class="wrapper" id="app" v-bind:datas="myData">
 
     <header class="main-header">
         <!-- Logo -->
@@ -308,21 +308,20 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li>
-                    <a v-link="{ path: '/pageA',query: { userId: 123 } }">
+                    <router-link to="/pageA">
                         <i class="fa fa-th"></i> <span>pageA</span>
                         <span class="pull-right-container">
                           <small class="label pull-right bg-green">new</small>
                         </span>
-                    </a>
-
+                    </router-link>
                 </li>
                 <li>
-                    <a v-link="{ path: '/pageB' }">
+                    <router-link to="/pageB">
                         <i class="fa fa-th"></i> <span>pageB</span>
                         <span class="pull-right-container">
                           <small class="label pull-right bg-green">new</small>
                         </span>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
         </section>
