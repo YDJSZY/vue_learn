@@ -4,25 +4,19 @@
 var pageA = require("../components/view_a/page_a.vue");
 var pageB = require("../components/view_b/page_b.vue");
 const Vue = require('vue');
+const beforeEnter = require("./beforeEnter");
 Vue.use(require('vue-resource'));
 const routes = [
     {
         path: '/pageA',
         component: pageA,
-        beforeEnter: function (to, from, next) {
-            var vue = new Vue();
-            if(vue.myInfo){
-                next()
-                return;
-            }
-            console.log(Vue.http)
-            Vue.http.get("./app/myInfo.json").then(function (response) {
-                Vue.prototype.myInfo = response.body;
-                next()
-            })
-        }
+        beforeEnter: beforeEnter(Vue)
     },
-    { path: '/pageB', component: pageB }
+    { 
+        path: '/pageB',
+        component: pageB,
+        beforeEnter: beforeEnter(Vue)
+    }
 ];
 
 module.exports = routes;

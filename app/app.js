@@ -4,14 +4,15 @@
 const Vue = require("vue");
 const VueRouter = require("vue-router");
 const routes = require("./route/routes");
-const store = require("vuex");
-console.log(store)
+const Vuex = require("vuex");
+const storeObj = require("./state_store/store");
 Vue.use(require("vue-resource"));
 Vue.use(VueRouter);
+Vue.use(Vuex);
+const store = new Vuex.Store(storeObj)
 const router = new VueRouter({
-    routes
+    routes:routes
 });
-var App = Vue.extend({});
 Vue.http.interceptors.push((request, next)  =>{
     //console.log(request)
 
@@ -41,6 +42,9 @@ const app = new Vue({
         }
         /*
         })*/
+    },
+    created: function() {
+        
     }
 }).$mount('#app');
 /*

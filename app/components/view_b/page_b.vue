@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>this is template {{msg}}</div>
+        <div>this is template {{msg}} {{myInfo.name}}</div>
     </div>
 </template>
 <style>
@@ -15,12 +15,7 @@
         data(){
             return{
                 msg:'pageB',
-                getData: function () {
-                console.log((new Vue()).myInfo)
-                     Vue.http.get("./app/data.json",{loading:true}).then(function(response) {
-                        console.log(response)
-                    })
-                },
+                myInfo:(new Vue()).myInfo,
                 datas:[
                         {"name":"luwnewei"},
                         {"name":"haungsihong"}
