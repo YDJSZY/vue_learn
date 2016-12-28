@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <div class="row" style="margin-bottom: 15px">
                         <form class="form-inline top-handle" style="margin-bottom: 15px">
-                            <date-range min-view="0"></date-range>
+                            <date-range :current-date="currentDate" @current-date-change="currentDateChange"></date-range>
                         </form>
                     </div>
                     <div>this is template {{msg}}</div>
@@ -49,6 +49,7 @@
                 num:1,
                 count:1,
                 child:"child",
+                currentDate:"2016-12-28",
                 datas:[
                         {"name":"luwnewei"},
                         {"name":"haungsihong"}
@@ -69,11 +70,14 @@
             getData: function (count) {
                 this.msg = "pageA!!!";
                 this.numPlus = parseInt(count);
-                console.log(this.num);
+                console.log(this);
                 console.log(this.$store.getters.getNa);
                 this.$store.commit("addAge",1);
 
             },
+            currentDateChange:function (date) {
+                console.log(date.begin)
+            }
         },
 
         computed: {
@@ -112,6 +116,16 @@
                     el.value = "卷珠帘";
                     console.log(binding)
                  }
+            }
+        },
+
+        mounted:function () {
+
+        },
+
+        watch:{
+            "currentDate":function (val,oldVal) {
+                console.log(val)
             }
         }
     }

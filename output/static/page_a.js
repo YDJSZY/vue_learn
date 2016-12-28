@@ -25,7 +25,7 @@ webpackJsonp([1],{
 	if (typeof __vue_options__ === "function") {
 	  __vue_options__ = __vue_options__.options
 	}
-	__vue_options__.__file = "/Users/Apple/WebstormProjects/vue_learn/app/components/view_a/page_a.vue"
+	__vue_options__.__file = "/Users/luwenwei/WebstormProjects/vue_learn/app/components/view_a/page_a.vue"
 	__vue_options__.render = __vue_template__.render
 	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -36,9 +36,9 @@ webpackJsonp([1],{
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-3142c7b5", __vue_options__)
+	    hotAPI.createRecord("data-v-391e373f", __vue_options__)
 	  } else {
-	    hotAPI.reload("data-v-3142c7b5", __vue_options__)
+	    hotAPI.reload("data-v-391e373f", __vue_options__)
 	  }
 	})()}
 	if (__vue_options__.functional) {console.error("[vue-loader] page_a.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -63,8 +63,8 @@ webpackJsonp([1],{
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3142c7b5!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./page_a.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-3142c7b5!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./page_a.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-391e373f!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./page_a.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-391e373f!./../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./page_a.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -424,6 +424,7 @@ webpackJsonp([1],{
 	            num: 1,
 	            count: 1,
 	            child: "child",
+	            currentDate: "2016-12-28",
 	            datas: [{ "name": "luwnewei" }, { "name": "haungsihong" }]
 	        };
 	    },
@@ -441,9 +442,12 @@ webpackJsonp([1],{
 	        getData: function (count) {
 	            this.msg = "pageA!!!";
 	            this.numPlus = parseInt(count);
-	            console.log(this.num);
+	            console.log(this);
 	            console.log(this.$store.getters.getNa);
 	            this.$store.commit("addAge", 1);
+	        },
+	        currentDateChange: function (date) {
+	            console.log(date.begin);
 	        }
 	    },
 
@@ -481,6 +485,14 @@ webpackJsonp([1],{
 	                console.log(binding);
 	            }
 	        }
+	    },
+
+	    mounted: function () {},
+
+	    watch: {
+	        "currentDate": function (val, oldVal) {
+	            console.log(val);
+	        }
 	    }
 	};
 
@@ -489,28 +501,31 @@ webpackJsonp([1],{
 /***/ 85:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
-	  return _c('div', [_c('fake-loader'), _vm._v(" "), _c('section', {
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;
+	  return _vm._c('div', [_vm._c('fake-loader'), _vm._v(" "), _vm._c('section', {
 	    staticClass: "content"
-	  }, [_c('div', {
+	  }, [_vm._c('div', {
 	    staticClass: "panel panel-default"
-	  }, [_vm._m(0), _vm._v(" "), _c('div', {
+	  }, [_vm._m(0), _vm._v(" "), _vm._c('div', {
 	    staticClass: "panel-body"
-	  }, [_c('div', {
+	  }, [_vm._c('div', {
 	    staticClass: "row",
 	    staticStyle: {
 	      "margin-bottom": "15px"
 	    }
-	  }, [_c('form', {
+	  }, [_vm._c('form', {
 	    staticClass: "form-inline top-handle",
 	    staticStyle: {
 	      "margin-bottom": "15px"
 	    }
-	  }, [_c('date-range', {
+	  }, [_vm._c('date-range', {
 	    attrs: {
-	      "min-view": "0"
+	      "current-date": _vm.currentDate
+	    },
+	    on: {
+	      "current-date-change": _vm.currentDateChange
 	    }
-	  })])]), _vm._v(" "), _c('div', [_vm._v("this is template " + _vm._s(_vm.msg))]), _vm._v(" "), _c('input', {
+	  })])]), _vm._v(" "), _vm._c('div', [_vm._v("this is template " + _vm._s(_vm.msg))]), _vm._v(" "), _vm._c('input', {
 	    directives: [{
 	      name: "model",
 	      rawName: "v-model",
@@ -526,7 +541,7 @@ webpackJsonp([1],{
 	        _vm.count = $event.target.value
 	      }
 	    }
-	  }), _vm._v(" "), _c('input', {
+	  }), _vm._v(" "), _vm._c('input', {
 	    directives: [{
 	      name: "focus",
 	      rawName: "v-focus:hello.a.b",
@@ -538,23 +553,23 @@ webpackJsonp([1],{
 	        "b": true
 	      }
 	    }]
-	  }), _vm._v(" "), _c('button', {
+	  }), _vm._v(" "), _vm._c('button', {
 	    on: {
 	      "click": function($event) {
 	        _vm.getData(_vm.count)
 	      }
 	    }
-	  }, [_vm._v("click")]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.na))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm.age))]), _vm._v(" "), _c('ul', [_c('to-do', {
+	  }, [_vm._v("click")]), _vm._v(" "), _vm._c('p', [_vm._v(_vm._s(_vm.na))]), _vm._v(" "), _vm._c('p', [_vm._v(_vm._s(_vm.age))]), _vm._v(" "), _vm._c('ul', [_vm._c('to-do', {
 	    attrs: {
 	      "name": _vm.child
 	    }
-	  }, [_c('h3', [_vm._v("我是来日伏组件")])])])]), _vm._v(" "), _c('div', {
+	  }, [_vm._c('h3', [_vm._v("我是来日伏组件")])])])]), _vm._v(" "), _vm._c('div', {
 	    staticClass: "panel-footer"
 	  })])])])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._c;
-	  return _c('div', {
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;
+	  return _vm._c('div', {
 	    staticClass: "panel-heading"
-	  }, [_c('h5', [_c('i', {
+	  }, [_vm._c('h5', [_vm._c('i', {
 	    staticClass: "fa fa-deaf"
 	  }), _vm._v("\n                    A页面\n                ")])])
 	}]}
@@ -562,7 +577,7 @@ webpackJsonp([1],{
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-3142c7b5", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-391e373f", module.exports)
 	  }
 	}
 

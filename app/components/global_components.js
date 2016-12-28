@@ -11,7 +11,7 @@ var fakeLoader = Vue.extend({
 
 Vue.component("fake-loader",fakeLoader);
 
-var dateRangeTemplate = `<div><select class="form-control">{options}</select>
+const dateRangeTemplate = `<div><select class="form-control">{options}</select>
                 <input type='datetime' style='width:140px' class='dateRangeBegin txtSetDate form-control' disabled='disabled'/> -
                 <input type='datetime' style='width:140px' class='dateRangeEnd txtSetDate form-control' disabled='disabled'/>
                 <button type='button' class='btn' style='display:none'>转到</button></div>`
@@ -19,7 +19,8 @@ var dateRange = Vue.extend({
     "template":dateRangeTemplate,
     "data":function () {
         return {
-            dateRange:{}
+            dateRange:{},
+            myDate:{}
         }
     },
     "mounted":function() {
@@ -29,8 +30,17 @@ var dateRange = Vue.extend({
                 "begin": begin,
                 "end": end,
             };
+            this.myDate = {
+                "begin": begin,
+                "end": end,
+            };;
         }
-        $(this.$el).dateRange(fn.bind(this), dateRangeTemplate,this.minView);
+        var config = {
+            template:dateRangeTemplate,
+            minView:this.minView,
+            //dateRangeName:"昨天"
+        }
+        var dateRangeComponent = $(this.$el).dateRange(fn.bind(this),config);
         $('input.txtSetDate').each(function (index, item) {
             $(item).datetimepicker({
                 format: self.format || "yyyy-mm-dd",
@@ -45,13 +55,15 @@ var dateRange = Vue.extend({
             });
         });
     },
-    "props":["minView"],
+    "props":["minView","currentDate"],
     "watch":{
-        "dateRange": {
-            handler:function (val, oldVal) {
-                console.log(val.begin)
-            },
-            deep:true
+        "dateRange": function (val, oldVal) {
+            //this._currentDate = val.begin;
+            this.$emit("current-date-change",val);
+        },
+        _currentDate:function (val,oldVal){
+            console.log(val)
+
         }
     }
 })

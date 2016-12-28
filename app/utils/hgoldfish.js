@@ -394,18 +394,20 @@ dateRangeSelectorTemplate += "<input type='datetime' class='dateRangeBegin' disa
 dateRangeSelectorTemplate += "<input type='datetime' class='dateRangeEnd' disabled='disabled'/>";
 dateRangeSelectorTemplate += "<button type='button' class='btn' style='display:none'>转到</button>";
 
-var DateRangeSelector = function (template,minView){
-    if(template) {
-        this.template = template;
+var DateRangeSelector = function (config){
+    for(var prop in config){
+        if(config.hasOwnProperty(prop)){
+            this[prop] = config[prop];
+        }
     }
-    this.init(minView);
+    this.init();
 };
 
 $.extend(DateRangeSelector.prototype, {
     template: dateRangeSelectorTemplate,
     beginDate: null,
     endDate: null,
-    dateRangeName: null,
+    dateRangeName: "今天",
     target: null,
     instantly: true,
     namedDateRanges: [
@@ -429,9 +431,7 @@ $.extend(DateRangeSelector.prototype, {
     ],
 
     init: function (minView) {
-        this.dateRangeName = "今天";
         this._setDateRangeName();
-        this.minView = minView;
     },
     render: function (target) {
         this.target = $(target);
@@ -614,12 +614,12 @@ $.extend(DateRangeSelector.prototype, {
 });
 
 $.fn.extend({
-    dateRange: function (handler, template,minView) {
+    dateRange: function (handler, config) {
         return this.map(function (){
             var p = $(this);
             var t = p.data("dateRangeSelector");
             if(!t) {
-                t = new DateRangeSelector(template,minView);
+                t = new DateRangeSelector(config);
                 var p = t.render(this);
                 p.data("dateRangeSelector", t);
                 if(handler) {

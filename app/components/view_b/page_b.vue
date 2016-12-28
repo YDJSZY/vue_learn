@@ -1,6 +1,7 @@
 <template>
     <div>
         <fake-loader></fake-loader>
+        <date-range></date-range>
         <div>this is template {{msg}} {{myInfo.name}}</div>
     </div>
 </template>

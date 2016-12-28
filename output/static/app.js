@@ -14843,7 +14843,8 @@ webpackJsonp([0],[
 	    "template": dateRangeTemplate,
 	    "data": function data() {
 	        return {
-	            dateRange: {}
+	            dateRange: {},
+	            myDate: {}
 	        };
 	    },
 	    "mounted": function mounted() {
@@ -14853,8 +14854,16 @@ webpackJsonp([0],[
 	                "begin": begin,
 	                "end": end
 	            };
+	            this.myDate = {
+	                "begin": begin,
+	                "end": end
+	            };;
 	        };
-	        $(this.$el).dateRange(fn.bind(this), dateRangeTemplate, this.minView);
+	        var config = {
+	            template: dateRangeTemplate,
+	            minView: this.minView
+	        };
+	        var dateRangeComponent = $(this.$el).dateRange(fn.bind(this), config);
 	        $('input.txtSetDate').each(function (index, item) {
 	            $(item).datetimepicker({
 	                format: self.format || "yyyy-mm-dd",
@@ -14869,13 +14878,14 @@ webpackJsonp([0],[
 	            });
 	        });
 	    },
-	    "props": ["minView"],
+	    "props": ["minView", "currentDate"],
 	    "watch": {
-	        "dateRange": {
-	            handler: function handler(val, oldVal) {
-	                console.log(val.begin);
-	            },
-	            deep: true
+	        "dateRange": function dateRange(val, oldVal) {
+	            //this._currentDate = val.begin;
+	            this.$emit("current-date-change", val);
+	        },
+	        _currentDate: function _currentDate(val, oldVal) {
+	            console.log(val);
 	        }
 	    }
 	});
