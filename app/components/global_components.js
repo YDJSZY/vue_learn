@@ -17,14 +17,20 @@ var dateRangeTemplate = `<div><select class="form-control">{options}</select>
                 <button type='button' class='btn' style='display:none'>转到</button></div>`
 var dateRange = Vue.extend({
     "template":dateRangeTemplate,
+    "data":function () {
+        return {
+            dateRange:{}
+        }
+    },
     "mounted":function() {
         var self = this;
-        $(this.$el).dateRange(function (event, begin, end) {
-         this.dateRange = {
-         "begin": begin,
-         "end": end,
-         };
-         }.bind(this), dateRangeTemplate,this.minView);
+        var fn = function (event, begin, end) {
+            this.dateRange = {
+                "begin": begin,
+                "end": end,
+            };
+        }
+        $(this.$el).dateRange(fn.bind(this), dateRangeTemplate,this.minView);
         $('input.txtSetDate').each(function (index, item) {
             $(item).datetimepicker({
                 format: self.format || "yyyy-mm-dd",
@@ -38,14 +44,14 @@ var dateRange = Vue.extend({
                 minView:self.minView || 2,
             });
         });
-        $(this.$el).on("dateRangeChanged",function (event,data) {
-            console.log(event)
-        })
     },
     "props":["minView"],
     "watch":{
-        "dateRange": function (val, oldVal) {
-            console.log(val)
+        "dateRange": {
+            handler:function (val, oldVal) {
+                console.log(val.begin)
+            },
+            deep:true
         }
     }
 })
