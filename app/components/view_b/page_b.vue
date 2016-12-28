@@ -1,5 +1,6 @@
 <template>
     <div>
+        <fake-loader></fake-loader>
         <div>this is template {{msg}} {{myInfo.name}}</div>
     </div>
 </template>
@@ -30,8 +31,13 @@
         },
 
         created: function () {
-                var vue = new Vue();
-                console.log(vue.myInfo)
-            }
+
+
+            },
+
+        mounted: function () {
+            var vue = new Vue();
+            vue.hideLoading();
+        }
     }
 </script>

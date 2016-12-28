@@ -2,16 +2,18 @@
  * Created by Apple on 16/12/19.
  */
 function beforeEnter(Vue) {
-    return function (to, from, next) {
+    return  async function (to, from, next) {
         var vue = new Vue();
         if(vue.myInfo){
             next()
             return;
         }
-        Vue.http.get("./app/myInfo.json").then(function (response) {
-            Vue.prototype.myInfo = response.body;
-            next()
-        })
+        var myInfo =  await Vue.http.get("./app/myInfo.json");
+        Vue.prototype.myInfo = myInfo.body;
+        var constants = await Vue.http.get("./app/constants.json");
+        Vue.prototype.constants = constants.body;
+        vue.hideLoading(true)
+        next()
     }
     
 };

@@ -6,6 +6,7 @@ const VueRouter = require("vue-router");
 const routes = require("./route/routes");
 const Vuex = require("vuex");
 const storeObj = require("./state_store/store");
+require("./components/global_components");
 Vue.use(require("vue-resource"));
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -13,18 +14,7 @@ const store = new Vuex.Store(storeObj)
 const router = new VueRouter({
     routes:routes
 });
-Vue.http.interceptors.push((request, next)  =>{
-    //console.log(request)
 
-    next((response) => {
-       // console.log(response)
-    return response
-    });
-});
-var home = Vue.extend({
-    "props":["msg"],
-    "template":'<h2>this is home page!!! {{msg}}</h2>'
-})
 const app = new Vue({
     router:router,
     store:store,
@@ -35,39 +25,45 @@ const app = new Vue({
         ],
         name:"vue"
     },
-    beforeCreate: function () {
-        // `this` 指向 vm 实例
-        Vue.prototype.getMyInfo = function () {
-            return this.$http.get("./app/myInfo.json");
+    methods:{
+        showLoading:function (global) {
+            var p, c;
+            if(global){
+                p = "fakeloader1";
+                c = "spinner1";
+            }else{
+                p = "fakeloader6";
+                c = "spinner2";
+            }
+            $('.' + c).show();
+            $("." + p).fadeIn("fast");
+        },
+        hideLoading: function (global) {
+            var p;
+            if(global){
+                p = "fakeloader1";
+            }else{
+                p = "fakeloader6";
+            }
+            $("."+p).fadeOut(500);
         }
-        /*
-        })*/
+    },
+    beforeCreate: function () {
+       
     },
     created: function() {
-        
+        this.showLoading(true);
+        Vue.prototype.showLoading = this.showLoading;
+        Vue.prototype.hideLoading = this.hideLoading;
     }
 }).$mount('#app');
-/*
-new Vue({
-    el: '#home',
-    components:{
-        "home":home
-    }
+
+Vue.http.interceptors.push(function(request, next){
+    if(request.loading){
+        app.showLoading()
+    };
+    next(function (response) {
+        app.hideLoading()
+        return response
+    })
 })
-//Vue.component('home',home)
-/!*Vue.component('home', {
-    // 声明 props
-    props: ['msg'],
-    // prop 可以用在模板内
-    // 可以用 `this.msg` 设置
-    template: '<h2>{{ msg }}</h2>'
-})
-new Vue({
-    el: '#home',
-    props: ['msg'],
-    template: '<h2>{{h}} {{ msg }}</h2>',
-    data:{
-        h:"hello!!!"
-    }
-})*!/
-router.start(App, '#app');*/

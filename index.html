@@ -6,18 +6,12 @@
     <link rel="stylesheet" href="output/static/plugins_css.css" type="text/css"></link>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<!--<div id="app">
-    <h1>Hello App!</h1>
-    <div id="home">
-        <home msg="world"></home>
+<div class="fakeloader1" style="position:fixed; width:100%; height:100%;background-color:#dee1e2;z-index: 9999">
+    <div class="fl spinner1" style="display:none">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
     </div>
-    <p>
-        &lt;!&ndash; use v-link directive for navigation. &ndash;&gt;
-
-    </p>
-    &lt;!&ndash; route outlet &ndash;&gt;
-
-</div>-->
+</div>
 <div class="wrapper" id="app" v-bind:datas="myData">
 
     <header class="main-header">
@@ -331,13 +325,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <router-view></router-view>
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-        </section>
+        <router-view></router-view>
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">

@@ -11,8 +11,10 @@
   "dependencies": {
     "admin-lte": "^2.3.8",
     "bootstrap": "^3.3.7",
+    "bootstrap-datetimepicker": "0.0.7",
     "font-awesome": "^4.7.0",
     "jquery": "2.2.3",
+    "moment": "^2.17.1",
     "vue": "^2.0.0",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.0",

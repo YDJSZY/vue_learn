@@ -15,8 +15,8 @@ module.exports = {
     // 输出配置
     output: {
         // 输出路径是 myProject/output/static
-        path: path.resolve(__dirname, './output/static'),
-        publicPath: 'static/',
+        path: path.resolve(__dirname, 'output/static'),
+        publicPath: 'output/static/',
         filename: '[name].js',
         chunkFilename: '[name].js'
     },
@@ -48,8 +48,16 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loader: 'babel?presets=es2015',
+                loader: 'babel-loader',
+                query: {
+                    plugins: ['transform-runtime'],
+                    presets: ['es2015', 'stage-0'],
+                },
                 exclude: /node_modules/
+            },
+            {
+                test: /\.scss$/,
+                loader: 'style!css!sass'
             },
             {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader")},
             /*{
@@ -73,6 +81,11 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin('plugins_js', 'plugins_js.js'),
-        new ExtractTextPlugin('plugins_css','plugins_css.css')
+        new ExtractTextPlugin('plugins_css','plugins_css.css'),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            'window.jQuery': 'jquery'  // 新的一行
+        })
     ]
 }
